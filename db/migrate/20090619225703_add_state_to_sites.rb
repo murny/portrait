@@ -1,4 +1,4 @@
-class AddStateToSites < ActiveRecord::Migration
+class AddStateToSites < ActiveRecord::Migration[5.1]
   def self.up
     add_column :sites, :state, :string
   end

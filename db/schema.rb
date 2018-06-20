@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 2018_02_17_000130) do
 
   create_table "sites", force: :cascade do |t|
     t.string "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "status"
     t.index ["created_at"], name: "index_sites_on_created_at"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2018_02_17_000130) do
     t.string "name"
     t.string "password"
     t.integer "sites_count", default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
