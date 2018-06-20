@@ -6,4 +6,7 @@
     %title .portrait.
   %body
     %h1= link_to 'portrait', root_path
-    #Content= yield
+    #Content
+      - if flash[:notice]
+        %p= flash[:notice]
+      = yield

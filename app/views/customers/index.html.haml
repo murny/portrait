@@ -1,0 +1,14 @@
+= render 'form', customer: @customer
+
+%table
+  %thead
+    %tr
+      %th= t('.name')
+      %th= t('customers.status')
+      %th= t('.users')
+  %tbody
+    - @customers.each do |customer|
+      %tr
+        %td= link_to customer.name, customer
+        %td= customer.active? ? t('customers.active') : t('customers.cancelled')
+        %td= number_with_delimiter customer.users_count

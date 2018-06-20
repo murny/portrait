@@ -13,10 +13,12 @@
   %tr
     %th Name
     %th Password
+    %th Customer
     %th Sites
 
   - @users.each do |user|
     %tr
       %td= link_to user.name, user
       %td= user.password
+      %td= user.customer.present? ? link_to(user.customer.name, customers_path) : ''
       %td= number_with_delimiter user.sites_count

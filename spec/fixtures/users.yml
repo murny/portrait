@@ -1,3 +1,14 @@
 admin:
   name: admin
   password: password
+  admin: true
+
+active_user:
+  name: wile
+  password: coyote
+  customer: acme
+
+cancelled_user:
+  name: gavin
+  password: belson
+  customer: hooli

@@ -36,5 +36,14 @@ class Site < ApplicationRecord
 
   validates :user_id, presence: true
   validates :url, format: /\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
+  validate  :check_customer_status, on: :create
 
+  private
+
+  def check_customer_status
+    return unless user.present?
+    return if user.admin? || user.customer&.active?
+
+    errors.add(:user, :invalid_customer)
+  end
 end

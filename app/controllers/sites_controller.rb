@@ -8,10 +8,18 @@ class SitesController < ApplicationController
 
   def create
     @site = @current_user.sites.build params.fetch(:site, {}).permit(:url)
-    @site.save
+
     respond_to do |format|
-      format.html { redirect_to sites_url }
-      format.json
+      if @site.save
+        format.html { redirect_to sites_url, notice: 'Site capture was successfully created.' }
+        format.json
+      else
+        format.html do
+            @sites = Site.with_attached_image.includes(:user).order(created_at: :desc).page params[:page]
+           render :index
+        end
+        format.json # TODO: I'd probably just refactor the `create.json.jbuilder` and put the errors here instead? But leaving this for now
+      end
     end
   end
 

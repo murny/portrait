@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.by_name
+    @users = User.includes(:customer).by_name
     @user  = User.new
   end
 
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   # POST /user
   def create
-    @user = User.new params.require(:user).permit!
+    @user = User.new(user_params)
     @user.save!
     redirect_to users_url
   rescue ActiveRecord::RecordInvalid
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   # PUT /users/:id
   def update
     @user = User.find_by! name: params[:id]
-    @user.update_attributes! params.require(:user).permit!
+    @user.update_attributes!(user_params)
     redirect_to @user
   rescue ActiveRecord::RecordInvalid
     render :show
@@ -38,4 +38,9 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :password, :customer_id)
+  end
 end

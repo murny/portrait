@@ -1,0 +1,7 @@
+acme:
+  name: 'Acme Inc'
+  active: true
+
+hooli:
+  name: 'Hooli Inc'
+  active: false
