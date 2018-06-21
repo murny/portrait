@@ -41,7 +41,7 @@ class Site < ApplicationRecord
   private
 
   def check_customer_status
-    return unless user.present?
+    return if user.blank?
     return if user.admin? || user.customer&.active?
 
     errors.add(:user, :invalid_customer)
