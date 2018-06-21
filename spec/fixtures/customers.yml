@@ -1,7 +1,9 @@
 acme:
   name: 'Acme Inc'
   active: true
+  tier: basic
 
 hooli:
   name: 'Hooli Inc'
   active: false
+  tier: enterprise

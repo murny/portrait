@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @customers = Customer.all
+    @customers = Customer.includes(:tier).all
     @customer = Customer.new
   end
 
@@ -16,7 +16,7 @@ class CustomersController < ApplicationController
     if @customer.save
       redirect_to customers_path, notice: t('.successfully_created')
     else
-      @customers = Customer.all
+      @customers = Customer.includes(:tier).all
       render :index
     end
   end
@@ -41,6 +41,6 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:name, :active)
+    params.require(:customer).permit(:name, :active, :tier_id)
   end
 end

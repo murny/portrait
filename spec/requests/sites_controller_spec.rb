@@ -43,6 +43,18 @@ describe SitesController, 'html' do
       expect(response).to render_template(:index)
     }.not_to change(Site, :count)
   end
+
+  it 'handles /sites with customer exceeding tier usage' do
+    login_as :active_user
+
+    @user.customer.tier.update(quantity: 1)
+
+    expect {
+      pst :sites, site: { url: 'https://google.com' }
+      expect(response).to be_successful
+      expect(response).to render_template(:index)
+    }.not_to change(Site, :count)
+  end
 end
 
 describe SitesController, 'js api' do
@@ -90,7 +102,24 @@ describe SitesController, 'js api' do
     expect {
       pst :sites, site: { url: 'https://google.com' }, format: :json
       expect(response).to be_successful
-      expect(response.body).to be_include(':{"errors":{"user":["is an inactive customer. Only active customers may take site captures."]}}')
+      expect(response.body).to be_include(
+        ':{"errors":{"user":["is an inactive customer. Only active customers may take site captures."]}}'
+      )
+    }.not_to change(Site, :count)
+  end
+
+  it 'handles /sites with customer exceeding tier usage' do
+    login_as :active_user
+
+    @user.customer.tier.update(quantity: 1)
+
+    expect {
+      pst :sites, site: { url: 'https://google.com' }, format: :json
+      expect(response).to be_successful
+      expect(response.body).to be_include(
+        ':{"errors":{"user":["has exceeded the customer\'s site usage limit. '\
+        'Please subscribe to a higher usage tier or contact our sales team at \'sales@portrait.com\'."]}}'
+      )
     }.not_to change(Site, :count)
   end
 
