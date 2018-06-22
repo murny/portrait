@@ -1,3 +1,17 @@
 admin:
   name: admin
   password: password
+  admin: true
+  sites_count: 1
+
+active_user:
+  name: wile
+  password: coyote
+  customer: acme
+  sites_count: 1
+
+cancelled_user:
+  name: gavin
+  password: belson
+  customer: hooli
+  sites_count: 0

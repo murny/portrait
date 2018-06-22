@@ -2,3 +2,8 @@ google:
   user: admin
   status: <%= Site.statuses[:succeeded] %>
   url: http://google.com
+
+acme_wiki:
+  user: active_user
+  status: <%= Site.statuses[:succeeded] %>
+  url: https://en.wikipedia.org/wiki/Acme_Corporation

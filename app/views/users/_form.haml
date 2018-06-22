@@ -1,6 +1,9 @@
 %dl
-  %dt Name
+  %dt= form.label :name
   %dd= form.text_field :name
 
-  %dt Password
+  %dt= form.label :password
   %dd= form.text_field :password
+
+  %dt= form.label :customer_id, t('.customer')
+  %dd= form.collection_select(:customer_id, Customer.all.order(name: :asc), :id, :name, include_blank: t('.customer_prompt'))

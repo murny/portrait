@@ -46,4 +46,11 @@ describe User, 'validations' do
     user.valid?
     expect(user.errors[:name]).not_to be_empty
   end
+
+  it 'should be invalid without admin' do
+    user = users(:admin)
+    user.admin = nil
+    expect(user.valid?).to be_falsey
+    expect(user.errors[:admin].first).to eq('must be true or false')
+  end
 end

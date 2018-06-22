@@ -1,0 +1,9 @@
+basic:
+  name: 'Basic'
+  price: 1
+  quantity: 5
+
+enterprise:
+  name: 'Enterprise'
+  price: 500
+  quantity: 1000

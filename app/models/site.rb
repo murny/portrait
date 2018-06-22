@@ -36,5 +36,22 @@ class Site < ApplicationRecord
 
   validates :user_id, presence: true
   validates :url, format: /\A((http|https):\/\/)*[a-z0-9_-]{1,}\.*[a-z0-9_-]{1,}\.[a-z]{2,5}(\/)?\S*\z/i
+  validate  :check_customer_status, on: :create
+  validate  :check_customer_usage, on: :create
 
+  private
+
+  def check_customer_status
+    return if user.blank?
+    return if user.admin? || user.customer&.active?
+
+    errors.add(:user, :invalid_customer)
+  end
+
+  def check_customer_usage
+    return if user.blank?
+    return if user.admin? || !user.customer&.usage_exceeded?
+
+    errors.add(:user, :customer_usage_exceeded)
+  end
 end

@@ -5,5 +5,8 @@
     = javascript_pack_tag 'application'
     %title .portrait.
   %body
-    %h1 portrait
-    #Content= yield
+    %h1= link_to 'portrait', root_path
+    #Content
+      - if flash[:notice]
+        %p= flash[:notice]
+      = yield

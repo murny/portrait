@@ -1,4 +1,4 @@
-class CreateSites < ActiveRecord::Migration
+class CreateSites < ActiveRecord::Migration[5.1]
   def self.up
     create_table :sites do |t|
       t.string   :url, :image_file_name, :image_content_type

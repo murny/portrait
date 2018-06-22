@@ -2,4 +2,53 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        site:
+          attributes:
+            user:
+              invalid_customer: 'is an inactive customer. Only active customers may take site captures.'
+              customer_usage_exceeded: "has exceeded the customer's site usage limit. Please subscribe to a higher usage tier or contact our sales team at 'sales@portrait.com'."
+        customer:
+          attributes:
+            active:
+              inclusion: 'must be true or false'
+        user:
+          attributes:
+            admin:
+              inclusion: 'must be true or false'
+
+  home:
+    index:
+      links:
+        customers: 'Manage Customers'
+  users:
+    form:
+      customer: Customer
+      customer_prompt: 'Select a customer'
+    index:
+  customers:
+    status: 'Status'
+    active: 'Active'
+    cancelled: 'Cancelled'
+
+    form:
+      errors_prohibited_customer_saving: '%{number_of_errors} prohibited this customer from being saved:'
+      create_customer: 'Create Customer'
+      update_customer: 'Update Customer'
+      tier: Usage Tier
+      tier_prompt: 'Select a usage tier'
+    index:
+      name: 'Name'
+      users: 'Users'
+      sites_total: 'Sites Total'
+      tier: 'Tier'
+    show:
+      back: 'Back'
+    create:
+      successfully_created: 'Customer was successfully created.'
+    update:
+      successfully_updated: 'Customer was successfully updated.'
+    destroy:
+      successfully_destroyed: 'Customer was successfully destroyed.'

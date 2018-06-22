@@ -1,0 +1,24 @@
+= form_with(model: customer, local: true) do |form|
+  - if customer.errors.any?
+    #ErrorModule
+      %h2= t('.errors_prohibited_customer_saving', number_of_errors: pluralize(customer.errors.count, 'error'))
+      %ul
+        - customer.errors.full_messages.each do |message|
+          %li= message
+  %p
+    = form.label :name
+    = form.text_field :name
+
+  %p
+    = form.label :active, t('customers.status')
+    = form.select :active, [[t('customers.active'), true], [t('customers.cancelled'), false]]
+
+  %p
+    = form.label :tier_id, t('.tier')
+    = form.select(:tier_id, tiers_array_for_select_box, include_blank: t('.tier_prompt'))
+
+  %p
+    - if customer.persisted?
+      = form.submit t('.update_customer')
+    - else
+      = form.submit t('.create_customer')
